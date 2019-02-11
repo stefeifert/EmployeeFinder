@@ -1,0 +1,25 @@
+{
+  "name": "employeefinder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App to select best employee based on survey",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefeifert/EmployeeFinder.git"
+  },
+  "author": "Stefanie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stefeifert/EmployeeFinder/issues"
+  },
+  "homepage": "https://github.com/stefeifert/EmployeeFinder#readme"
+}
