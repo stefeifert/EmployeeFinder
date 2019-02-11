@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const employees = require('./app/data/employees');
 
 const app = express();
 
@@ -14,25 +15,22 @@ app.get('/survey', function (request, response) {
   response.sendFile(path.join(__dirname, './app/public/survey.html'));
 });
 
-
-
 app.get('/api/employees', function (req, res) {
   return res.json(employees);
 });
 
-// app.get('/api/employees/:employee', function (req, res) {
-//   const chosen = req.params.employee;
-//   console.log(chosen);
-//   for (let i = 0; i < employees.length; i++) {
-//     if (chosen === employees[i].routeName) {
-//       return res.json(employees[i]);
-//     }
-//   }
+app.get('/api/employees/:employee', function (req, res) {
+  const chosen = req.params.employee;
+  console.log(chosen);
+  for (let i = 0; i < employees.length; i++) {
+  if (chosen === employees[i].routeName) {
+  return res.json(employees[i]);
+  }
+}
 
-//   return res.send('No employee found');
-// });
+return res.send('No employee found');
+});
 
-//WHERE DOES THIS GO??//
 app.listen(PORT, function () {
   console.log(`Server is listening on: ${PORT}`);
 });
