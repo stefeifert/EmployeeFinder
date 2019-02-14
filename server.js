@@ -1,40 +1,32 @@
-const express = require('express');
-const path = require('path');
-const employees = require('./app/data/employees');
+// Node Dependencies
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
 
-const app = express();
+var app = express();
 
-const PORT = process.env.PORT || 3000;
+// Link in html and api routes
+var apiRoutes = require('./app/routing/api-routes.js');
+var htmlRoutes = require('./app/routing/html-routes.js');
 
+// Set up Express App
+var app = express();
+var PORT = process.env.PORT || 3000;
 
-app.get('/', function (request, response) {
-  response.sendFile(path.join(__dirname, './app/public/home.html'));
+// Sets up the Express app to handle data parsing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+
+// Server Routing Map 
+apiRoutes(app); // API route - Must be listed first due to the HTML default catch all "use" route
+htmlRoutes(app); // HTML route 
+
+// Listener - Start the server
+app.listen(PORT, function() {
+  console.log("App listening on PORT: " + PORT);
 });
-
-app.get('/survey', function (request, response) {
-  response.sendFile(path.join(__dirname, './app/public/survey.html'));
-});
-
-app.get('/api/employees', function (req, res) {
-  return res.json(employees);
-});
-
-app.get('/api/employees/:employee', function (req, res) {
-  const chosen = req.params.employee;
-  console.log(chosen);
-  for (let i = 0; i < employees.length; i++) {
-  if (chosen === employees[i].routeName) {
-  return res.json(employees[i]);
-  }
-}
-
-return res.send('No employee found');
-});
-
-app.listen(PORT, function () {
-  console.log(`Server is listening on: ${PORT}`);
-});
-
 
 
 
