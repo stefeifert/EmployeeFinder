@@ -24,7 +24,7 @@ apiRoutes(app); // API route - Must be listed first due to the HTML default catc
 htmlRoutes(app); // HTML route 
 
 // Listener - Start the server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("App listening on PORT: " + PORT);
 });
 
