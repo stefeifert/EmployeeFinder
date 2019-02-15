@@ -1,4 +1,4 @@
-sole.log('HTML Route Connected Successfully');
+
 
 
 // Node Dependencies
@@ -14,7 +14,7 @@ function htmlRoutes(app) {
   });
 
   // A default USE route that leads to home.html which displays the home page.
-  app.use(function (req, res) {
+  app.use('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/../public/home.html'));
   });
 
