@@ -11,11 +11,12 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="app/public/style.css">
+  <link rel="stylesheet" href="/app/public/style.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="./js/survey.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <!-- <script src="/survey.js"></script>  -->
+  
   <link rel="stylesheet" type="text/css" media="screen" href="main.css">
 
 </head>
@@ -194,104 +195,14 @@
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
 
-      </div>
+        </div>
 
       </div>
     </div>
 
   </div>
 
-  <!-- Link in jQuery -->
-  <script src="https://code.jquery.com/jquery.js"></script>
 
-  <!-- Latest compiled and minified JavaScript (USED FOR THE MODAL) -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-
-  <!-- JavaScript for Submission Logic -->
-  <script>
-    // Global Variable Declaration (scoping fix)
-    var allFieldsCompleted;
-    $(document).ready(function () {
-      // Event Listener for Submission
-      $('#submitButton').on('click', function () {
-
-        // Check if all the user fields are completed
-        checkIfComplete(function () {
-          // Proceed with AJAX call if all questions are answered
-          if (allFieldsCompleted) {
-            collectInputs();
-          }
-          else {
-            alert('Please complete all fields before submitting!');
-          }
-        }); // end checkIfComplete() callback
-      }); // end submit listener
-    }); // document ready
-    // Function to valid user input
-    function checkIfComplete(callback) {
-      // Check through all the questions (i.e. iterate through all of class "chosen-select")
-      var questionsCompleted;
-      $('.chosen-select').each(function () {
-        if ($(this).val() == "") {
-          questionsCompleted = false;
-        }
-      })
-        // This counters the async behavior of $.each()
-        .promise().done(function () {
-          // Check if any questions are incomplete
-          if (questionsCompleted == false) {
-            allFieldsCompleted = false;
-          }
-          // Determine if Name is entered
-          else if ($('#formName').val().trim() == "") {
-            allFieldsCompleted = false;
-          }
-          // Determine if Link is entered
-          else if ($('#formImage').val().trim() == "") {
-            allFieldsCompleted = false;
-          }
-          // Otherwise, the all fields are completed
-          else {
-            allFieldsCompleted = true;
-          }
-          // Fire Off Callback (to counter async behavior of $.each)
-          callback();
-        });
-    }
-    function collectInputs() {
-      // Make new employee object
-      var newEmployee = {
-        name: $('#formName').val().trim(),
-        photo: $('#formImage').val().trim(),
-        scores: []
-      };
-      // Loop through Questions to get scores
-      var scoresArray = [];
-      $('.chosen-select').each(function () {
-        scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
-      })
-        // This counters the async behavior of $.each()
-        .promise().done(function () {
-
-          // Push the array of scores to the new employee object
-          newEmployee.scores = scoresArray;
-          // POST the newEmployee to the employees.js file and get back the best match
-          var currentURL = window.location.origin;
-          $.post(currentURL + "/api/employees", newEmployee, function (data) {
-            // Add Best Match attributes to Modal
-            $('#matchName').text(data.name);
-            $('#matchImg').attr('src', data.photo);
-            // Show the modal with the best match 
-            $("#resultsModal").modal('toggle');
-          }); // end AJAX POST
-        });
-    }
-  </script>
-
-  </body>
+</body>
 
 </html>
-
-
