@@ -23,20 +23,22 @@ function apiRoutes(app) {
       scores: []
     };
     var scoresArray = [];
-    for(var i=0; i < req.body.scores.length; i++){
-      scoresArray.push( parseInt(req.body.scores[i]) )
-    }
-    newEmployee.scores = scoresArray;
+    console.log(req.body.scores)
+
+    // for(var i=0; i < req.body.scores.length; i++){
+    //   scoresArray.push( parseInt(req.body.scores[i]) )
+    // }
+    // newEmployee.scores = scoresArray;
 
 
     // Cross check the new employee entry with the existing ones
     var scoreComparisionArray = [];
-    for(var i=0; i < employeesData.length; i++){
+    for (var i = 0; i < employeesData.length; i++) {
 
       // Check each employee's scores and sum difference in points
       var currentComparison = 0;
-      for(var j=0; j < newEmployee.scores.length; j++){
-        currentComparison += Math.abs( newEmployee.scores[j] - employeesData[i].scores[j] );
+      for (var j = 0; j < newEmployee.scores.length; j++) {
+        currentComparison += Math.abs(newEmployee.scores[j] - employeesData[i].scores[j]);
       }
 
       // Push each comparison between employees to array
@@ -45,10 +47,10 @@ function apiRoutes(app) {
 
     // Determine the best match using the postion of best match in the friendsData array
     var bestMatchPosition = 0; // assume its the first person to start
-    for(var i=1; i < scoreComparisionArray.length; i++){
-      
+    for (var i = 1; i < scoreComparisionArray.length; i++) {
+
       // Lower number in comparison difference means better match
-      if(scoreComparisionArray[i] <= scoreComparisionArray[bestMatchPosition]){
+      if (scoreComparisionArray[i] <= scoreComparisionArray[bestMatchPosition]) {
         bestMatchPosition = i;
       }
 
