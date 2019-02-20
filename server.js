@@ -5,6 +5,8 @@ var path = require('path');
 
 var app = express();
 
+app.use(express.static(path.join(__dirname, './app/public'))
+
 // Link in html and api routes
 var apiRoutes = require('./app/routing/apiRoutes.js');
 var htmlRoutes = require('./app/routing/htmlRoutes.js');
