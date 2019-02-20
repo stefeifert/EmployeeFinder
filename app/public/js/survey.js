@@ -70,7 +70,7 @@ $(document).ready(function () {
           $('#matchName').text(data.name);
           $('#matchImg').attr('src', data.photo);
           // Show the modal with the best match 
-          $("#resultsModal").modal('toggle');
+          $("#resultsModal").modal('show');
         }); // end AJAX POST
       });
   }

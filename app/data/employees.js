@@ -81,7 +81,7 @@ var employeesData = [
     },
     {
         "name": "Jordan Biason",
-        "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAisAAAAJGUxYzc4YzA0LWQxMzUtNGI4NS04YTFiLTkwYzM0YTZkNzA2NA.jpg",
+        "photo": "http://gtspirit.org/wp-content/uploads/2018/07/GTvsPitt_092317_DK-05-768x512.jpg",
         "scores": [
             "4",
             "4",
